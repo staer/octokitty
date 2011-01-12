@@ -1,7 +1,7 @@
 {
-	"id": "com.yourdomain.octokitty",
+	"id": "com.staersoft.octokitty",
 	"version": "1.0.0",
-	"vendor": "My Company",
+	"vendor": "Dan 'Staer' Harris",
 	"type": "web",
 	"main": "index.html",
 	"title": "octokitty",
