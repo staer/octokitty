@@ -1,8 +1,12 @@
 [
     {"source": "app/assistants/stage-assistant.js"},
-	{"source": "app/assistants/kitty-assistant.js"},
+    {"source": "app/assistants/kitty-assistant.js"},
     {
         "scenes": "feeds",
         "source": "app/assistants/feeds-assistant.js"
+    },
+    {
+        "scenes": "searchResults",
+        "source": "app/assistants/searchResults-assistant.js"
     }
 ]
