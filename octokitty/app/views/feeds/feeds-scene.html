@@ -1,0 +1,35 @@
+<div class="overlay" id="searchMenu" style="display:none;">
+	<div class="palm-group">
+	  <div class="palm-group-title">
+	     Search GitHub 
+	  </div>
+	  <div class="palm-list">
+	     <div class='palm-row single'>
+	        <div class="palm-row-wrapper">
+	          <div class="textfield-group" x-mojo-focus-highlight="true">
+	              <div class="title">     
+	                <div class="truncating-text" id="txtSearchTerm" x-mojo-element="TextField"></div>
+	              </div> 
+	          </div>
+	        </div>
+	     </div>
+	  </div>
+	</div>
+	<table align="center">
+		<tr>
+			<td><div x-mojo-element="Button" id="btnCancel" style="width: 125px;"></div></td>
+			<td><div x-mojo-element="Button" id="btnSearch" style="width: 125px;"></div></td>
+		</tr>
+	</table>
+	
+</div>
+
+
+<div>
+	<div x-mojo-element="List" id="feedList"></div>
+</div>
+
+
+<div id="myScrim">
+  <div id="mySpinner" x-mojo-element="Spinner"></div>
+</div>

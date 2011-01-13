@@ -1,1 +1,28 @@
 /* TODO: put your application-specific CSS here */
+body {
+    background-color: white !important;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid grey;
+    -webkit-border-radius: 5px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 160px;
+    padding-top: 50px;
+    background-color: white;
+    box-shadow: 3px 3px 7px #777;
+    border-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.palm-scrim {
+    z-index: 999;
+}

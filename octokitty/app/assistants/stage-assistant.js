@@ -1,6 +1,8 @@
 var StageAssistant;
 StageAssistant = (function() {
   function StageAssistant() {}
-  StageAssistant.prototype.setup = function() {};
+  StageAssistant.prototype.setup = function() {
+    return this.controller.pushScene("feeds");
+  };
   return StageAssistant;
 })();
