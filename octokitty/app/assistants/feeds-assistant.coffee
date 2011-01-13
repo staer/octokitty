@@ -13,7 +13,9 @@ class FeedsAssistant extends KittyAssistant
         
         
         # Menu at the top of the screen
-        @controller.setupWidget(Mojo.Menu.viewMenu, {}, @viewMenuModel = {
+        @controller.setupWidget(Mojo.Menu.viewMenu, {
+            menuClass: "aboveScrim"
+        }, @viewMenuModel = {
             visible: yes,
             items: [
                 {
@@ -29,7 +31,9 @@ class FeedsAssistant extends KittyAssistant
         })
         
         # Menu at the bottom of the screen
-        @controller.setupWidget(Mojo.Menu.commandMenu, {}, @commandMenuModel = {
+        @controller.setupWidget(Mojo.Menu.commandMenu, {
+            menuClass: "belowScrim"
+        }, @commandMenuModel = {
             visible: yes,
             items: [
                 {
@@ -94,17 +98,10 @@ class FeedsAssistant extends KittyAssistant
             @controller.get("searchMenu").setStyle({display: "none"});
             @searchBoxModel.visible = no
             @scrim.hide()
-            
-            @commandMenuModel.visible = yes
-            @controller.modelChanged @commandMenuModel
         else
             @controller.get("searchMenu").setStyle({display: "block"});
             @searchBoxModel.visible = yes
-            @scrim.show()
-            
-            @commandMenuModel.visible = no
-            @controller.modelChanged @commandMenuModel
-            
+            @scrim.show()            
             @controller.get("txtSearchTerm").mojo.focus()
         
         

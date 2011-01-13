@@ -5,7 +5,7 @@ body {
 
 .overlay {
     position: absolute;
-    z-index: 1000;
+    z-index: 99999;
     border: 1px solid grey;
     -webkit-border-radius: 5px;
     top: 0px;
@@ -23,6 +23,10 @@ body {
     margin-right: 5px;
 }
 
-.palm-scrim {
-    z-index: 999;
+.aboveScrim {
+    z-index: 1000000;    
+}
+
+.belowScrim {
+    z-index: 88888;
 }

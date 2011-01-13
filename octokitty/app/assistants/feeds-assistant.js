@@ -22,7 +22,9 @@ FeedsAssistant = (function() {
     });
     this.scrim.hide();
     this.controller.get("myScrim").appendChild(this.scrim);
-    this.controller.setupWidget(Mojo.Menu.viewMenu, {}, this.viewMenuModel = {
+    this.controller.setupWidget(Mojo.Menu.viewMenu, {
+      menuClass: "aboveScrim"
+    }, this.viewMenuModel = {
       visible: true,
       items: [
         {
@@ -43,7 +45,9 @@ FeedsAssistant = (function() {
         }
       ]
     });
-    this.controller.setupWidget(Mojo.Menu.commandMenu, {}, this.commandMenuModel = {
+    this.controller.setupWidget(Mojo.Menu.commandMenu, {
+      menuClass: "belowScrim"
+    }, this.commandMenuModel = {
       visible: true,
       items: [
         {
@@ -128,17 +132,13 @@ FeedsAssistant = (function() {
         display: "none"
       });
       this.searchBoxModel.visible = false;
-      this.scrim.hide();
-      this.commandMenuModel.visible = true;
-      return this.controller.modelChanged(this.commandMenuModel);
+      return this.scrim.hide();
     } else {
       this.controller.get("searchMenu").setStyle({
         display: "block"
       });
       this.searchBoxModel.visible = true;
       this.scrim.show();
-      this.commandMenuModel.visible = false;
-      this.controller.modelChanged(this.commandMenuModel);
       return this.controller.get("txtSearchTerm").mojo.focus();
     }
   };
