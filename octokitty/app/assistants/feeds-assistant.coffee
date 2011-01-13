@@ -75,8 +75,9 @@ class FeedsAssistant extends KittyAssistant
             hintText: 'Enter search terms here',
             multiline: no,
             enterSubmits: yes,
-            focus: yes
-        }, {
+            focus: yes,
+            textCase: Mojo.Widget.steModeLowerCase
+        }, @txtSearchTermModel = {
             value: "",
             disalbed: no
         })
@@ -85,26 +86,44 @@ class FeedsAssistant extends KittyAssistant
             label: "Cancel",
             buttonClass: "negative"
         })
-        @controller.listen("btnCancel", Mojo.Event.tap, @toggleSearchBox )
+        @controller.listen("btnCancel", Mojo.Event.tap, @toggleSearchBox)
         
         
         @controller.setupWidget("btnSearch", {}, {
             label: "Search",
             buttonClass: "secondary"
         })
+        @controller.listen("btnSearch", Mojo.Event.tap, @executeSearch)
+        
+        @controller.document.addEventListener("keyup", @keyHandler, true);
+        
+    keyHandler: (event) =>
+            if Mojo.Char.isEnterKey(event.keyCode)
+                if event.srcElement.parentElement.id == "txtSearchTerm"
+                    @executeSearch()
         
     toggleSearchBox: (event) =>
         if @searchBoxModel.visible
+            # Reset the searchTerm text to nothing
+            @txtSearchTermModel.value = "";
+            @controller.modelChanged(@txtSearchTermModel)
+            
+            # Hide the search menu and the scrim
             @controller.get("searchMenu").setStyle({display: "none"});
             @searchBoxModel.visible = no
             @scrim.hide()
+            
         else
+            # Show the search menu and the scrim
             @controller.get("searchMenu").setStyle({display: "block"});
             @searchBoxModel.visible = yes
             @scrim.show()            
+            # Auto focus the searchTerm text box
             @controller.get("txtSearchTerm").mojo.focus()
-        
-        
+            
+    executeSearch: (event) =>
+        @toggleSearchBox()
+        Mojo.Controller.stageController.pushScene "searchResults"    
     
     handleCommand: (event) ->
         if event.type == Mojo.Event.command

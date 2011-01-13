@@ -10,7 +10,9 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 FeedsAssistant = (function() {
   __extends(FeedsAssistant, KittyAssistant);
   function FeedsAssistant() {
+    this.executeSearch = __bind(this.executeSearch, this);;
     this.toggleSearchBox = __bind(this.toggleSearchBox, this);;
+    this.keyHandler = __bind(this.keyHandler, this);;
   }
   FeedsAssistant.prototype.setup = function() {
     FeedsAssistant.__super__.setup.call(this);
@@ -111,8 +113,9 @@ FeedsAssistant = (function() {
       hintText: 'Enter search terms here',
       multiline: false,
       enterSubmits: true,
-      focus: true
-    }, {
+      focus: true,
+      textCase: Mojo.Widget.steModeLowerCase
+    }, this.txtSearchTermModel = {
       value: "",
       disalbed: false
     });
@@ -121,13 +124,24 @@ FeedsAssistant = (function() {
       buttonClass: "negative"
     });
     this.controller.listen("btnCancel", Mojo.Event.tap, this.toggleSearchBox);
-    return this.controller.setupWidget("btnSearch", {}, {
+    this.controller.setupWidget("btnSearch", {}, {
       label: "Search",
       buttonClass: "secondary"
     });
+    this.controller.listen("btnSearch", Mojo.Event.tap, this.executeSearch);
+    return this.controller.document.addEventListener("keyup", this.keyHandler, true);
+  };
+  FeedsAssistant.prototype.keyHandler = function(event) {
+    if (Mojo.Char.isEnterKey(event.keyCode)) {
+      if (event.srcElement.parentElement.id === "txtSearchTerm") {
+        return this.executeSearch();
+      }
+    }
   };
   FeedsAssistant.prototype.toggleSearchBox = function(event) {
     if (this.searchBoxModel.visible) {
+      this.txtSearchTermModel.value = "";
+      this.controller.modelChanged(this.txtSearchTermModel);
       this.controller.get("searchMenu").setStyle({
         display: "none"
       });
@@ -141,6 +155,10 @@ FeedsAssistant = (function() {
       this.scrim.show();
       return this.controller.get("txtSearchTerm").mojo.focus();
     }
+  };
+  FeedsAssistant.prototype.executeSearch = function(event) {
+    this.toggleSearchBox();
+    return Mojo.Controller.stageController.pushScene("searchResults");
   };
   FeedsAssistant.prototype.handleCommand = function(event) {
     if (event.type === Mojo.Event.command) {
